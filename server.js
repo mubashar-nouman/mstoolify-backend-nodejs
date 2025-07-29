@@ -1,10 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
-import authRoutes from './routes/auth.routes.js';
 import { PORT } from './config/keys.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import authRoutes from './routes/auth.routes.js';
+import promptRoutes from './routes/prompts.routes.js';
+import aiToolsRoutes from './routes/aiTools.routes.js';
+
+
 
 dotenv.config();
 
@@ -27,6 +31,8 @@ connectDB();
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/prompts', promptRoutes);
+app.use('/api/writer', aiToolsRoutes);
 
 // Root
 app.get('/', (req, res) => res.send('API is running...'));
